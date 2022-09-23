@@ -1,0 +1,113 @@
+-- Create Table to Store Data for Life Expectency
+
+ -- Life Expectency
+CREATE TABLE life_expect (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	status VARCHAR(40),
+	life_expectancy real NOT NULL,
+	adult_mortality int,
+	infant_deaths int,
+	alcohol real,
+	percentage_expenditure real,
+	hepatitis int,
+	measles int,
+	bmi real,
+	under_five_deaths int,
+	polio int ,
+	total_expenditure real,
+	diphtheria int,
+	hiv_aids real,
+	thinness_10to19_years real,
+	thinness_5to9_years real,
+	income_composition real,
+	schooling real,
+	population real,
+	gdp real,
+	PRIMARY KEY (country, year_)
+	);
+	
+-- Drinking Water
+CREATE TABLE drinking_water (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	drinking_water Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+ -- Basic Sani
+CREATE TABLE basic_sani (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	basic_sanitation Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+ -- Emissions
+CREATE TABLE emissions (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	emissions Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+	
+ -- Hand Washing
+CREATE TABLE hand_washing (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	hand_washing Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+	
+ -- Safe Sanitation
+CREATE TABLE safe_sanitation (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	safe_sani Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+ -- Continents
+CREATE TABLE continents (
+    country VARCHAR(100) NOT NULL,
+	continent VARCHAR(100) NOT NULL,
+	PRIMARY KEY (country)
+	);
+
+
+-- Combine all tables
+SELECT le.country, 
+	le.year_, 
+	co.continent,
+	le.status,
+	le.life_expectancy,
+	le.adult_mortality,
+	le.infant_deaths,
+	le.alcohol,
+	le.percentage_expenditure,
+	le.hepatitis,
+	le.measles,
+	le.bmi,
+	le.under_five_deaths,
+	le.polio,
+	le.total_expenditure,
+	le.diphtheria,
+	le.hiv_aids,
+	le.thinness_10to19_years,
+	le.thinness_5to9_years,
+	le.income_composition,
+	le.schooling,
+	le.population,
+	le.gdp,
+	dw.drinking_water,
+	bs.basic_sanitation,
+	hw.hand_washing,
+	ss.safe_sani,
+	e.emissions
+FROM life_expect AS le 
+FULL OUTER JOIN continents co ON le.country=co.country
+FULL OUTER JOIN drinking_water dw ON le.country=dw.country AND le.year_=dw.year_
+FULL OUTER JOIN basic_sani bs ON le.country=bs.country AND le.year_=bs.year_
+FULL OUTER JOIN safe_sanitation ss  ON le.country=ss.country AND le.year_=ss.year_
+FULL OUTER JOIN hand_washing hw  ON le.country=hw.country AND le.year_=hw.year_
+FULL OUTER JOIN emissions e ON le.country=e.country AND le.year_=e.year_;

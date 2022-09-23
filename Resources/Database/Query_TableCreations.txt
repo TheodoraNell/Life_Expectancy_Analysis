@@ -1,0 +1,87 @@
+-- Create Table to Store Data for Life Expectency
+
+ -- Life Expectency
+CREATE TABLE life_expect (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	status VARCHAR(40) NOT NULL,
+	life_expectancy Real NOT NULL,
+	adult_mortality int NOT NULL,
+	infant_death int NOT NULL,
+	alcohol real NOT NULL,
+	percentage_expenditure Real NOT NULL,
+	hepatitis int NOT NULL,
+	measles int NOT NULL,
+	bmi real NOT NULL,
+	under_five_deaths int NOT NULL,
+	polio int NOT NULL,
+	total_expenditure real NOT NULL,
+	diphtheria int NOT NULL,
+	hiv_aids real NOT NULL,
+	gdp real NOT NULL,
+	population_ real NOT NULL,
+	thinness_1to19 real NOT NULL,
+	thinness_5to9 real NOT NULL,
+	income_composition real NOT NULL,
+	schooling real NOT NULL,
+	
+	PRIMARY KEY (country, year_)
+	);
+SELECT * FROM life_expect;
+
+-- DROP TABLE life_expect;
+
+SELECT * FROM sani_service;
+
+
+-- Drinking Water
+CREATE TABLE drinking_water (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	drinking_water Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+ 
+SELECT * FROM drinking_water;
+ 
+ -- Basic Sani
+CREATE TABLE basic_sani (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	basic_sanitation Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+SELECT * FROM basic_sani;
+
+ -- Emissions
+CREATE TABLE emissions (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	emissions Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+SELECT * FROM emissions;
+
+ -- Hand Washing
+CREATE TABLE hand_washing (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	hand_washing Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+SELECT * FROM hand_washing;
+
+ -- Sani Service
+CREATE TABLE sani_service (
+    country VARCHAR(100) NOT NULL,
+    year_ int NOT NULL,
+	sani_service Real NOT NULL,
+	PRIMARY KEY (country, year_)
+	);
+
+SELECT * FROM sani_service;
+	

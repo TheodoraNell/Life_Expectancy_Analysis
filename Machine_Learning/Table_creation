@@ -1,0 +1,183 @@
+-- Join life_expect and basic_sani on country column where years match 
+CREATE TABLE le_bs AS
+SELECT 
+	le.country,
+	le.year_,
+	le.status,
+	le.life_expectancy,
+	le.adult_mortality,
+	le.population_,
+	le.under_five_deaths,
+	le.measles,
+	le.gdp,
+	le.hiv_aids,
+	le.bmi,
+	le.polio,
+	bs.basic_sanitation
+FROM 
+	life_expect AS le
+LEFT JOIN 
+	basic_sani AS bs
+ON 
+	le.country = bs.country
+WHERE 
+	le.year_ = bs.year_;
+
+-- Join life_expect and drinking water on country column where years match 
+CREATE TABLE le_dw AS
+SELECT 
+	le.country,
+	le.year_,
+	le.status,
+	le.life_expectancy,
+	le.adult_mortality,
+	le.population_,
+	le.under_five_deaths,
+	le.measles,
+	le.gdp,
+	le.hiv_aids,
+	le.bmi,
+	le.polio,
+	dw.drinking_water
+FROM 
+	life_expect AS le
+LEFT JOIN 
+	drinking_water AS dw
+ON 
+	le.country = dw.country
+WHERE 
+	le.year_ = dw.year_;
+	
+-- Join life_expect and emissions on country column where years match 
+CREATE TABLE le_em AS
+SELECT 
+	le.country,
+	le.year_,
+	le.status,
+	le.life_expectancy,
+	le.adult_mortality,
+	le.population_,
+	le.under_five_deaths,
+	le.measles,
+	le.gdp,
+	le.hiv_aids,
+	le.bmi,
+	le.polio,
+	em.emissions
+FROM 
+	life_expect AS le
+LEFT JOIN 
+	emissions AS em
+ON 
+	le.country = em.country
+WHERE 
+	le.year_ = em.year_;
+	
+-- Join life_expect and sani_service on country column where years match 
+CREATE TABLE le_ss AS
+SELECT 
+	le.country,
+	le.year_,
+	le.status,
+	le.life_expectancy,
+	le.adult_mortality,
+	le.population_,
+	le.under_five_deaths,
+	le.measles,
+	le.gdp,
+	le.hiv_aids,
+	le.bmi,
+	le.polio,
+	ss.sani_service
+FROM 
+	life_expect AS le
+LEFT JOIN 
+	sani_service AS ss
+ON 
+	le.country = ss.country
+WHERE 
+	le.year_ = ss.year_;
+	
+--working to join the life_expect table with all the other tables into one table
+CREATE TABLE le_bsdw AS
+SELECT 
+	le_bs.country,
+	le_bs.year_,
+	le_bs.status,
+	le_bs.life_expectancy,
+	le_bs.adult_mortality,
+	le_bs.population_,
+	le_bs.under_five_deaths,
+	le_bs.measles,
+	le_bs.gdp,
+	le_bs.hiv_aids,
+	le_bs.bmi,
+	le_bs.polio,
+	le_bs.basic_sanitation,
+	le_dw.drinking_water
+FROM 
+	le_bs
+LEFT JOIN 
+	le_dw
+ON 
+	le_bs.country = le_dw.country
+WHERE 
+	le_bs.year_ = le_dw.year_;
+	
+--working to join the life_expect table with all the other tables into one table
+CREATE TABLE le_emss AS
+SELECT 
+	le_em.country,
+	le_em.year_,
+	le_em.status,
+	le_em.life_expectancy,
+	le_em.adult_mortality,
+	le_em.population_,
+	le_em.under_five_deaths,
+	le_em.measles,
+	le_em.gdp,
+	le_em.hiv_aids,
+	le_em.bmi,
+	le_em.polio,
+	le_em.emissions,
+	le_ss.sani_service
+FROM 
+	le_em
+LEFT JOIN 
+	le_ss
+ON 
+	le_em.country = le_ss.country
+WHERE 
+	le_em.year_ = le_ss.year_;
+	
+--Last table with all 5 datasets in there
+CREATE TABLE le_all AS
+SELECT 
+	le_bsdw.country,
+	le_bsdw.year_,
+	le_bsdw.status,
+	le_bsdw.life_expectancy,
+	le_bsdw.adult_mortality,
+	le_bsdw.population_,
+	le_bsdw.under_five_deaths,
+	le_bsdw.measles,
+	le_bsdw.gdp,
+	le_bsdw.hiv_aids,
+	le_bsdw.bmi,
+	le_bsdw.polio,
+	le_bsdw.basic_sanitation,
+	le_bsdw.drinking_water,
+	le_emss.emissions,
+	le_emss.sani_service
+FROM 
+	le_bsdw
+LEFT JOIN 
+	le_emss
+ON 
+	le_bsdw.country = le_emss.country
+WHERE 
+	le_bsdw.year_ = le_emss.year_;
+	
+--Drop the unnecessary tables
+DROP TABLE le_bsdw;
+DROP TABLE le_emss;

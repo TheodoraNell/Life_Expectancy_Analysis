@@ -1,0 +1,32 @@
+-- Latitude/Longitude
+CREATE TABLE lat_long (
+    Country VARCHAR(100) NOT NULL,
+    Latitude real NOT NULL,
+	Longitude real NULL,
+	PRIMARY KEY (country)
+	);
+
+SELECT * FROM lat_long;
+
+
+-- 2022 Life Expectancy
+CREATE TABLE life_expect_2022 (
+    Country VARCHAR(100) NOT NULL,
+	Life_Expectancy real NOT NULL,
+    Female real NOT NULL,
+	Male real NOT NULL,
+	PRIMARY KEY (country)
+	);
+	
+SELECT * FROM life_expect_2022;
+
+-- Joining ther tables
+SELECT 	lat_long.Country,
+    lat_long.Latitude,
+    lat_long.Longitude,
+	life_expect_2022.Life_Expectancy,
+	life_expect_2022.Female,
+	life_expect_2022.Male
+FROM lat_long
+INNER JOIN life_expect_2022
+ON lat_long.Country = life_expect_2022.Country;
